@@ -1,0 +1,10 @@
+# ngrok traffic policy — bypass the free-tier browser interstitial so the Telegram
+# Mini App WebView loads the app directly (otherwise GET / with a browser UA returns
+# the "You are about to visit ... ERR_NGROK_6024" warning page).
+# Injects the skip header on every inbound request before the interstitial check.
+on_http_request:
+  - actions:
+      - type: add-headers
+        config:
+          headers:
+            ngrok-skip-browser-warning: "true"

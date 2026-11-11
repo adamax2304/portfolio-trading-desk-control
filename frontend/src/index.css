@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; --safe-b: env(safe-area-inset-bottom, 0px); --safe-t: env(safe-area-inset-top, 0px); }
+* { -webkit-tap-highlight-color: transparent; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  color: #e9eef7;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  /* layered institutional backdrop: radial accents over deep navy-black */
+  background:
+    radial-gradient(900px 500px at 50% -8%, rgba(53,224,240,0.07), transparent 60%),
+    radial-gradient(700px 500px at 100% 100%, rgba(124,108,255,0.06), transparent 55%),
+    #05070D;
+  background-attachment: fixed;
+}
+.tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+@layer components {
+  /* glass card: subtle translucent surface + hairline border */
+  .glass {
+    background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 18px 40px -28px rgba(0,0,0,0.9);
+    backdrop-filter: blur(8px);
+  }
+  .glass-soft { background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; }
+  .hairline { border-bottom: 1px solid rgba(255,255,255,0.06); }
+
+  .label { @apply text-[10px] uppercase tracking-[0.14em] text-faint font-medium; }
+  .metric { @apply text-[26px] leading-none font-semibold tnum; }
+
+  .badge { @apply inline-flex items-center gap-1 text-[10.5px] font-medium px-2 py-[3px] rounded-full border leading-none; }
+  .b-accent { background: rgba(53,224,240,0.12); border-color: rgba(53,224,240,0.4); color: #7af0fb; }
+  .b-violet { background: rgba(124,108,255,0.12); border-color: rgba(124,108,255,0.4); color: #b6acff; }
+  .b-profit { background: rgba(39,209,139,0.12); border-color: rgba(39,209,139,0.42); color: #6ee7b0; }
+  .b-warn   { background: rgba(246,183,60,0.12); border-color: rgba(246,183,60,0.42); color: #f7cd77; }
+  .b-danger { background: rgba(255,93,108,0.12); border-color: rgba(255,93,108,0.45); color: #ff97a2; }
+  .b-shadow { background: rgba(156,140,255,0.12); border-color: rgba(156,140,255,0.4); color: #c3b8ff; }
+  .b-muted  { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: #8693ab; }
+
+  .btn { @apply text-[13px] font-medium px-3.5 py-2.5 rounded-xl border transition active:scale-[0.97] select-none; border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.045); }
+  .btn-accent { background: rgba(53,224,240,0.14); border-color: rgba(53,224,240,0.45); color: #7af0fb; }
+  .btn-danger { background: rgba(255,93,108,0.12); border-color: rgba(255,93,108,0.45); color: #ff97a2; }
+  .btn:disabled { @apply opacity-40 pointer-events-none; }
+
+  .seg { @apply flex gap-1 p-1 rounded-xl overflow-x-auto; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); }
+  .seg button { @apply text-[12px] px-3 py-1.5 rounded-lg whitespace-nowrap text-muted transition; }
+  .seg button[data-on="true"] { background: rgba(53,224,240,0.16); color: #aef3fb; box-shadow: 0 0 0 1px rgba(53,224,240,0.3); }
+
+  .skel { background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.09) 37%, rgba(255,255,255,0.04) 63%); background-size: 400% 100%; border-radius: 12px; position: relative; overflow: hidden; }
+  .skel::after { content:""; position:absolute; inset:0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent); animation: shimmer 1.4s infinite; }
+}
+
+.scroll-x::-webkit-scrollbar { display: none; }
+.scroll-x { scrollbar-width: none; }
